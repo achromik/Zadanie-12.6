@@ -7,3 +7,32 @@
     padding: 0
 .flag
     height: 50px    
+.country__item
+    border: 1px solid #333
+    margin: 10px
+    padding: 15px
+.country__item:nth-child(odd)
+    background: #999   
+.row
+    margin: 0
+    padding: 3px 0
+
+.country__name
+    font-family: 'Raleway', sans-serif    
+    font-weight: 800
+    font-size: 26px
+.country__capital
+    font-family: 'Raleway', sans-serif    
+    font-weight: 600
+    font-size: 18px
+
+.value
+    font-size: 15px
+    font-weight: bold    
+
+@for $i from 1 through 12
+    .col-#{$i}
+        width: floor((100% / 12 * $i)*1000)/1000
+
+[class*="col-"]
+    float: left        

@@ -2,7 +2,10 @@ var url = 'https://restcountries.eu/rest/v2/name/',
     $countriesList = $('#countries'),
     $info = $('#info'); 
 
+var response;    
+
 $('#search').on('click', searchCountries);
+
 
 $('#country-name').on('keypress', function(event) {
     var keycode = event.keyCode || event.which;
@@ -11,11 +14,15 @@ $('#country-name').on('keypress', function(event) {
     }
 });
 
+$('#full').on('change', function(event) {
+    if(response) {
+        show(response);
+    }
+});
+
+
 function searchCountries () {
     var countryName = $('#country-name').val();
-        
-
-    //if search field is empty then set country as POLAND
     if(!countryName.length) countryName = '';
     $.ajax({
         url: url + countryName,
@@ -28,16 +35,14 @@ function searchCountries () {
     });
 }
 
-var full = true ;
-
-
 function show(resp) {
-    //response = resp;
-    if (full) {
-        showFull(resp);
+    response = resp;
+
+    if ($('#full').is(':checked')) {
+        showFull(response);
         
     } else {
-        showCountriesList(resp);
+        showCountriesList(response);
     }
     $info.text('Match found: ' + resp.length );
 } 
@@ -54,14 +59,39 @@ function showFull(resp) {
     $countriesList.empty();
     $countriesList.addClass('type-list-none');
     resp.forEach(function(element) {
-        var $listItem = $('<li>').addClass('country__item'),
-            $wrapper = $('<div>').addClass('country__item-wrapper'),
-            $name = $('<h3>').addClass('country__name').text(element.name),
-            $flag = $('<img>').addClass('flag').attr('src', element.flag),
-            $capital = $('<h4>').addClass('country__capital').text(element.capital);
 
-        $wrapper.append($name).append($flag).append($capital).appendTo($listItem).appendTo($countriesList);
-                               
+        var $listItem = $('<li>').addClass('country__item'),
+            $name = $('<h3>').addClass('country__name col-8').text(element.name),
+            $capital = $('<span>').addClass('country__capital').text(element.capital),
+            $flag = ($('<img>').addClass('flag').attr('src', element.flag));
+
+        $countriesList
+        .append($listItem
+            .append($('<div>').addClass('row')
+                .append($('<div>').addClass('col-3').append($flag))
+                .append($('<div>').addClass('col-9').append($name))
+            )
+            .append($('<div>').addClass('row')
+                .append($('<div>').addClass('col-2').text('Capital:'))
+                .append($('<div>').addClass('col-8').append($capital))
+            )
+            .append($('<div>').addClass('row')
+                .append($('<div>').addClass('col-2').text('Currency:'))
+                .append($('<div>').addClass('col-4 value').text(element.currencies[0].name))
+                .append($('<div>').addClass('col-2').text('Time zones:'))
+                .append($('<div>').addClass('col-4 value').text(element.timezones.join(', ')))
+            )
+            .append($('<div>').addClass('row')
+                .append($('<div>').addClass('col-2').text('Population:'))
+                .append($('<div>').addClass('col-4 value').text(element.population))
+                .append($('<div>').addClass('col-2').text('Subregion:'))
+                .append($('<div>').addClass('col-4 value').text(element.subregion))
+            )
+            .append($('<div>').addClass('row')
+                .append($('<div>').addClass('col-2').text('Borders'))
+                .append($('<div>').addClass('col-10 value').text(element.borders.join(', ')))
+            )
+        );
     });
 }
 
@@ -73,3 +103,7 @@ function showNotFound() {
         fontSize: "18px"
     }).appendTo($info);   
 }
+
+String.prototype.packInTag = function(tag) {
+    return '<' + tag + '>'+ this + '</' + tag + '>';
+};

@@ -14,7 +14,7 @@
         <script>
             WebFont.load({
                 google: {
-                    families: ['Open+Sans:300,400,700,900']
+                    families: ['Open+Sans:300,400,700,900', 'Raleway:400:600:800']
                 }
             });
         </script>
@@ -23,17 +23,18 @@
         <div class="container">
             <h1>Country search engine</h1>
     
-                <div class="form-group form-inline ">
-                    <button id="search" class="btn btn-primary">Search a country</button>
-                    <input class="form-control col-md-4 " type="text" id="country-name">
-                </div>
-
+            <div class="form-group form-inline ">
+                <button id="search" class="btn btn-primary">Search a country</button>
+                <input class="form-control col-md-4 " type="text" id="country-name">
+            </div>
+            
             <h2>List of countries <small id="info"></small></h2>
-            <ul id="countries">
+            <div class="checkbox">
+                <label><input id="full" type="checkbox" value="full">Check if you want to see extended version</label>
+            </div>
+            <ul id="countries" class='col-6'>
                 
             </ul>
-            <!-- <div id="info" class="info">
-            </div>      -->
         </div>
         <div class="over">
             <div class="inner"></div>
