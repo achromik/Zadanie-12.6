@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+        <script src="https://use.fontawesome.com/1a68a42f88.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./css/style.min.css">
+        <script>
+            WebFont.load({
+                google: {
+                    families: ['Open+Sans:300,400,700,900']
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Country search engine</h1>
+    
+                <div class="form-group form-inline ">
+                    <button id="search" class="btn btn-primary">Search a country</button>
+                    <input class="form-control col-md-4 " type="text" id="country-name">
+                </div>
+
+            <h2>List of countries <small id="info"></small></h2>
+            <ul id="countries">
+                
+            </ul>
+            <!-- <div id="info" class="info">
+            </div>      -->
+        </div>
+        <div class="over">
+            <div class="inner"></div>
+        </div>
+        <script src="./js/scripts.min.js"></script>
+    </body>
+</html>
